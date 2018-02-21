@@ -126,9 +126,24 @@ public class Janela extends javax.swing.JDialog {
 
     private void converterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_converterActionPerformed
 
+        int entrada, resto;
+        
+        String saida = "";
+        
         //BINÁRIO -> DECIMAL 
         if (boxEntrada.getSelectedIndex() == 0 && boxSaida.getSelectedIndex() == 1) {
-
+            
+            entrada = Integer.parseInt(textEntrada.getText());
+            
+            while(entrada >= 2)
+            {
+                //entrada%2
+            }
+            if (entrada == 1)
+            {
+                //textSaida.setText("1");
+            }
+            
         }
 
         //BINÁRIO -> HEXADECIMAL 
@@ -138,17 +153,68 @@ public class Janela extends javax.swing.JDialog {
 
         //DECIMAL -> BINÁRIO
         if (boxEntrada.getSelectedIndex() == 1 && boxSaida.getSelectedIndex() == 0) {
+            
+            entrada = Integer.parseInt(textEntrada.getText());
+            
+            if (entrada == 1)
+            {
+                textSaida.setText("1");
+            }
+            else if (entrada == 0 )
+            {
+                textSaida.setText("0");
+            }
+            else
+            {
+                do
+                {
+                    resto = entrada%2;
+                    entrada = entrada/2;
+               
+                    saida = resto + saida;
+            
+                }while(entrada >= 2);
+                
+                saida = entrada + saida;
+                
+                textSaida.setText(saida);
+            }
+            
 
         }
 
         //DECIMAL -> HEXADECIMAL 
         if (boxEntrada.getSelectedIndex() == 1 && boxSaida.getSelectedIndex() == 2) {
 
+            entrada = Integer.parseInt(textEntrada.getText());
+            
+            if (entrada < 16)
+            {
+                
+                textSaida.setText(textEntrada.getText());
+            }
+            else
+            {
+                do
+                {
+                    resto = entrada%16;
+                    entrada = entrada/16;
+               
+                    saida = resto + saida;
+            
+                }while(entrada >= 16);
+                
+                saida = entrada + saida;
+                
+                textSaida.setText(saida);
+            }
+            
         }
 
         //HEXADECIMAL -> BINÁRIO
         if (boxEntrada.getSelectedIndex() == 2 && boxSaida.getSelectedIndex() == 0) {
-
+            
+            
         }
 
         //HEXADECIMAL -> DECIMAL
@@ -156,8 +222,8 @@ public class Janela extends javax.swing.JDialog {
 
         }
 
-        textEntrada.setText("OK!");
-        textSaida.setText("OK!");
+       // textEntrada.setText("OK!");
+       // textSaida.setText("OK!");
     }//GEN-LAST:event_converterActionPerformed
 
     /**
