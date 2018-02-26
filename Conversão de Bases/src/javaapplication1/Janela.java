@@ -129,20 +129,15 @@ public class Janela extends javax.swing.JDialog {
         int entrada, resto;
         
         String saida = "";
+        String resto_2 = "";
+        boolean flag = false;
         
         //BINÁRIO -> DECIMAL 
         if (boxEntrada.getSelectedIndex() == 0 && boxSaida.getSelectedIndex() == 1) {
             
             entrada = Integer.parseInt(textEntrada.getText());
             
-            while(entrada >= 2)
-            {
-                //entrada%2
-            }
-            if (entrada == 1)
-            {
-                //textSaida.setText("1");
-            }
+          
             
         }
 
@@ -168,6 +163,7 @@ public class Janela extends javax.swing.JDialog {
             {
                 do
                 {
+                    System.out.println("CAGUEIIII");
                     resto = entrada%2;
                     entrada = entrada/2;
                
@@ -197,16 +193,56 @@ public class Janela extends javax.swing.JDialog {
             {
                 do
                 {
+                    flag = false;
+                    
                     resto = entrada%16;
                     entrada = entrada/16;
+                    
+                    if(resto == 10)
+                    {
+                        resto_2 = "A";
+                        flag = true;
+                    }
+                    else if(resto == 11)
+                    {
+                        resto_2 = "B";
+                        flag = true;
+                    }
+                    else if(resto == 12)
+                    {
+                        resto_2 = "C";
+                        flag = true;
+                    }
+                    else if(resto == 13)
+                    {
+                        resto_2 = "D";
+                        flag = true;
+                    }
+                    else if(resto == 14)
+                    {
+                        resto_2 = "E";
+                        flag = true;
+                    }
+                    else if(resto == 15)
+                    {
+                        resto_2 = "F";
+                        flag = true;
+                    }
                
-                    saida = resto + saida;
-            
-                }while(entrada >= 16);
-                
+                    if(flag == false)
+                    {
+                        saida = resto + saida;
+                    }
+                    else
+                    {
+                        saida = resto_2 + saida;
+                    }
+                }while(entrada >= 16); 
+               
                 saida = entrada + saida;
+                    
+                textSaida.setText(saida);     
                 
-                textSaida.setText(saida);
             }
             
         }
