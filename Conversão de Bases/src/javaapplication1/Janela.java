@@ -126,19 +126,31 @@ public class Janela extends javax.swing.JDialog {
 
     private void converterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_converterActionPerformed
 
-        int entrada, resto;
+        double entrada, resto;
         
         String saida = "";
         String resto_2 = "";
         boolean flag = false;
+        double pot=0, decimal = 0;
+    
         
         //BINÁRIO -> DECIMAL 
         if (boxEntrada.getSelectedIndex() == 0 && boxSaida.getSelectedIndex() == 1) {
             
             entrada = Integer.parseInt(textEntrada.getText());
             
-          
+            while (entrada > 0);
+            {
+                resto = entrada%10;
+                decimal = decimal + resto*Math.pow(2,pot);
+                pot++;
+                entrada = entrada/10;
+            }
             
+            saida = decimal + resto_2;
+            
+            textSaida.setText(saida);
+   
         }
 
         //BINÁRIO -> HEXADECIMAL 
@@ -163,7 +175,6 @@ public class Janela extends javax.swing.JDialog {
             {
                 do
                 {
-                    System.out.println("CAGUEIIII");
                     resto = entrada%2;
                     entrada = entrada/2;
                
@@ -255,6 +266,21 @@ public class Janela extends javax.swing.JDialog {
 
         //HEXADECIMAL -> DECIMAL
         if (boxEntrada.getSelectedIndex() == 2 && boxSaida.getSelectedIndex() == 1) {
+           pot = 0; 
+           
+            entrada = Integer.parseInt(textEntrada.getText());
+            
+            while (entrada > 0);
+            {
+                resto = entrada%100;
+                decimal = decimal + resto*Math.pow(16,pot);
+                pot++;
+                entrada = entrada/100;
+            }
+            
+            saida = decimal + resto_2;
+            
+            textSaida.setText(saida);
 
         }
 
