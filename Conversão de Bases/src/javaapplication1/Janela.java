@@ -126,12 +126,11 @@ public class Janela extends javax.swing.JDialog {
 
     private void converterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_converterActionPerformed
 
-        double entrada, resto;
+        int entrada, resto;
         
         String saida = "";
-        String resto_2 = "";
-        boolean flag = false;
-        double pot=0, decimal = 0;
+        int pot=0; 
+        int decimal = 0;
     
         
         //BINÁRIO -> DECIMAL 
@@ -141,13 +140,14 @@ public class Janela extends javax.swing.JDialog {
             
             while (entrada > 0);
             {
+                System.out.println("LOOP");
                 resto = entrada%10;
-                decimal = decimal + resto*Math.pow(2,pot);
-                pot++;
                 entrada = entrada/10;
+                decimal = (int) (decimal + resto*Math.pow(2,pot));
+                pot++;  
             }
             
-            saida = decimal + resto_2;
+            saida = decimal + "";
             
             textSaida.setText(saida);
    
@@ -163,32 +163,23 @@ public class Janela extends javax.swing.JDialog {
             
             entrada = Integer.parseInt(textEntrada.getText());
             
-            if (entrada == 1)
-            {
-                textSaida.setText("1");
-            }
-            else if (entrada == 0 )
-            {
-                textSaida.setText("0");
-            }
-            else
-            {
-                do
-                {
-                    resto = entrada%2;
-                    entrada = entrada/2;
+           
+             do
+             {
+                resto = entrada%2;
+                entrada = entrada/2;
                
-                    saida = resto + saida;
+                saida = resto + saida;
             
-                }while(entrada >= 2);
+            }while(entrada >= 2);
                 
-                saida = entrada + saida;
+            saida = entrada + saida;
                 
-                textSaida.setText(saida);
+            textSaida.setText(saida);
             }
             
 
-        }
+        
 
         //DECIMAL -> HEXADECIMAL 
         if (boxEntrada.getSelectedIndex() == 1 && boxSaida.getSelectedIndex() == 2) {
@@ -204,53 +195,70 @@ public class Janela extends javax.swing.JDialog {
             {
                 do
                 {
-                    flag = false;
+                    
                     
                     resto = entrada%16;
                     entrada = entrada/16;
                     
                     if(resto == 10)
                     {
-                        resto_2 = "A";
-                        flag = true;
+                       saida = "A" + saida;
                     }
                     else if(resto == 11)
                     {
-                        resto_2 = "B";
-                        flag = true;
+                        saida = "B" + saida;
                     }
                     else if(resto == 12)
                     {
-                        resto_2 = "C";
-                        flag = true;
+                        saida = "C" + saida;
                     }
                     else if(resto == 13)
                     {
-                        resto_2 = "D";
-                        flag = true;
+                        saida = "D" + saida;
                     }
                     else if(resto == 14)
                     {
-                        resto_2 = "E";
-                        flag = true;
+                        saida = "E" + saida;
                     }
                     else if(resto == 15)
                     {
-                        resto_2 = "F";
-                        flag = true;
-                    }
-               
-                    if(flag == false)
-                    {
-                        saida = resto + saida;
+                        saida = "F" + saida;
                     }
                     else
                     {
-                        saida = resto_2 + saida;
+                        saida = resto + saida;
                     }
+        
                 }while(entrada >= 16); 
                
-                saida = entrada + saida;
+                if(entrada == 10)
+                {
+                    saida = "A" + saida;
+                }
+                else if(entrada == 11)
+                {
+                    saida = "B" + saida;
+                }
+                else if(entrada == 12)
+                {
+                    saida = "C" + saida;
+                }
+                else if(entrada == 13)
+                {
+                    saida = "D" + saida;
+                }
+                else if(entrada == 14)
+                {
+                    saida = "E" + saida;
+                }
+                else if(entrada == 15)
+                {
+                    saida = "F" + saida;
+                }
+                else
+                {
+                    saida = entrada + saida;
+                }
                     
                 textSaida.setText(saida);     
                 
@@ -273,12 +281,12 @@ public class Janela extends javax.swing.JDialog {
             while (entrada > 0);
             {
                 resto = entrada%100;
-                decimal = decimal + resto*Math.pow(16,pot);
+                decimal = (int) (decimal + resto*Math.pow(16,pot));
                 pot++;
                 entrada = entrada/100;
             }
             
-            saida = decimal + resto_2;
+            saida = decimal + "";
             
             textSaida.setText(saida);
 
