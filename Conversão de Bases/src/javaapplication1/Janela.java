@@ -5,6 +5,7 @@
  */
 package javaapplication1;
 
+
 /**
  *
  * @author Daniel Teixeira
@@ -127,35 +128,115 @@ public class Janela extends javax.swing.JDialog {
     private void converterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_converterActionPerformed
 
         int entrada, resto;
-        
+        int convert = 0;
         String saida = "";
         int pot=0; 
         int decimal = 0;
+       
     
         
         //BINÁRIO -> DECIMAL 
         if (boxEntrada.getSelectedIndex() == 0 && boxSaida.getSelectedIndex() == 1) {
             
-            entrada = Integer.parseInt(textEntrada.getText());
+             String ent = textEntrada.getText();
             
-            while (entrada > 0);
+            int base = 1;
+            for(int i = ent.length()-1; i >= 0; i--)
             {
-                System.out.println("LOOP");
-                resto = entrada%10;
-                entrada = entrada/10;
-                decimal = (int) (decimal + resto*Math.pow(2,pot));
-                pot++;  
+                if(ent.charAt(i)== '1')
+                {
+                    decimal += (Math.pow(2, base)/2);
+                }
+                base++;
             }
-            
-            saida = decimal + "";
-            
-            textSaida.setText(saida);
+           
+            textSaida.setText(String.valueOf(decimal));
+      
    
         }
 
         //BINÁRIO -> HEXADECIMAL 
         if (boxEntrada.getSelectedIndex() == 0 && boxSaida.getSelectedIndex() == 2) {
-
+             
+            String ent = textEntrada.getText();
+            
+            int base = 1;
+            for(int i = ent.length()-1; i >= 0; i--)
+            {
+                if(ent.charAt(i)== '1')
+                {
+                    decimal += (Math.pow(2, base)/2);
+                }
+                base++;
+            }
+            
+            do
+                {
+                    resto = decimal%16;
+                    decimal = decimal/16;
+                    
+                    if(resto == 10)
+                    {
+                       saida = "A" + saida;
+                    }
+                    else if(resto == 11)
+                    {
+                        saida = "B" + saida;
+                    }
+                    else if(resto == 12)
+                    {
+                        saida = "C" + saida;
+                    }
+                    else if(resto == 13)
+                    {
+                        saida = "D" + saida;
+                    }
+                    else if(resto == 14)
+                    {
+                        saida = "E" + saida;
+                    }
+                    else if(resto == 15)
+                    {
+                        saida = "F" + saida;
+                    }
+                    else
+                    {
+                        saida = resto + saida;
+                    }
+        
+                }while(decimal >= 16); 
+               
+                if(decimal == 10)
+                {
+                    saida = "A" + saida;
+                }
+                else if(decimal == 11)
+                {
+                    saida = "B" + saida;
+                }
+                else if(decimal == 12)
+                {
+                    saida = "C" + saida;
+                }
+                else if(decimal == 13)
+                {
+                    saida = "D" + saida;
+                }
+                else if(decimal == 14)
+                {
+                    saida = "E" + saida;
+                }
+                else if(decimal == 15)
+                {
+                    saida = "F" + saida;
+                }
+                else
+                {
+                    saida = decimal + saida;
+                }
+                
+                textSaida.setText(saida); 
+            
         }
 
         //DECIMAL -> BINÁRIO
@@ -269,26 +350,38 @@ public class Janela extends javax.swing.JDialog {
         //HEXADECIMAL -> BINÁRIO
         if (boxEntrada.getSelectedIndex() == 2 && boxSaida.getSelectedIndex() == 0) {
             
+            decimal = 0;
+            String ent = textEntrada.getText();
+            int base = 0;
+            for(int i = ent.length()-1; i >= 0; i--){
+                    decimal += Character.getNumericValue(ent.charAt(i)) * (Math.pow(16, base));
+                base++;
+            }
+            do
+             {
+                resto = decimal%2;
+                decimal = decimal/2;
+               
+                saida = resto + saida;
+            
+            }while(decimal >= 2);
+                
+            saida = decimal + saida;
+                
+            textSaida.setText(saida);
             
         }
 
         //HEXADECIMAL -> DECIMAL
         if (boxEntrada.getSelectedIndex() == 2 && boxSaida.getSelectedIndex() == 1) {
-           pot = 0; 
-           
-            entrada = Integer.parseInt(textEntrada.getText());
-            
-            while (entrada > 0);
-            {
-                resto = entrada%100;
-                decimal = (int) (decimal + resto*Math.pow(16,pot));
-                pot++;
-                entrada = entrada/100;
+            decimal = 0;
+            String ent = textEntrada.getText();
+            int base = 0;
+            for(int i = ent.length()-1; i >= 0; i--){
+                    decimal += Character.getNumericValue(ent.charAt(i)) * (Math.pow(16, base));
+                base++;
             }
-            
-            saida = decimal + "";
-            
-            textSaida.setText(saida);
+            textSaida.setText(String.valueOf(decimal));
 
         }
 
